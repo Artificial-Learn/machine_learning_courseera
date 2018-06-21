@@ -24,7 +24,7 @@ Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):en
 
 % Setup some useful variables
 m = size(X, 1);
-         
+y1= zeros(m,num_labels) ;      
 % You need to return the following variables correctly 
 J = 0;
 Theta1_grad = zeros(size(Theta1));
@@ -39,9 +39,16 @@ Theta2_grad = zeros(size(Theta2));
 %         cost function computation is correct by verifying the cost
 %         computed in ex4.m
 %
-X = (ones(m,1) X);
+X = [ones(m,1) X];
 a = sigmoid(X * Theta1');
-c = sigmoid((ones(m,1) a)*Theta2');
+c = sigmoid(([ones(m,1) a])*Theta2');
+h = log(c);
+p=log(1-c);
+for i=1:m
+y1(i,y(i))=1;
+end
+J=(-1/m)*(sum(sum(y1.*h +(1-y1).*p)));
+
 
 
 
