@@ -47,7 +47,7 @@ p=log(1-c);
 for i=1:m
 y1(i,y(i))=1;
 end
-J=(-1/m)*(sum(sum(y1.*h +(1-y1).*p)));
+J=(-1/m)*(sum(sum(y1.*h +(1-y1).*p))) + ((lambda/(2*m))*(sum(sum(Theta1(:,2:end).*Theta1(:,2:end)))+sum(sum(Theta2(:,2:end).*Theta2(:,2:end)))));
 
 
 
@@ -67,6 +67,17 @@ J=(-1/m)*(sum(sum(y1.*h +(1-y1).*p)));
 %               over the training examples if you are implementing it for the 
 %               first time.
 %
+grad_a = a .* (1-a);
+%grad_c = c .* (1-c);
+del3 = zeros(num_labels,1);
+del2 = zeros(hidden_layer_size,1);
+for i =1:m
+del3 = (c(i,:)- y1(i,:))';
+del2 = (Theta2' * del3).*(grad_a(i,:);
+del2 = del2(2:end);
+
+ 
+
 % Part 3: Implement regularization with the cost function and gradients.
 %
 %         Hint: You can implement this around the code for
