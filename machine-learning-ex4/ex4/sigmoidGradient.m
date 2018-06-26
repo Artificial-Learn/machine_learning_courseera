@@ -14,8 +14,7 @@ g = zeros(size(z));
 
 
 
-g1 = 1./(1+ e.^(-z'));
-g= (g1).*(1-g1);
+g = (sigmoid(z)).*(1-sigmoid(z));
 
 
 
